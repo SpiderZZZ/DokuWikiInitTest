@@ -1,0 +1,39 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.51'
+  }
+}
+
+apply plugin: "kotlin"
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile 'org.jetbrains.kotlin:kotlin-stdlib:1.2.51'
+  testCompile 'junit:junit:4.12'
+  testCompile 'com.codeborne:selenide:4.12.2'
+  testCompile 'org.jetbrains.kotlin:kotlin-test-junit:1.2.51'
+}
+
+task libs(type: Sync) {
+  from configurations.compile
+  from configurations.testCompile
+  into "$buildDir/lib"
+}
+
+compileKotlin.dependsOn libs
+
+test {
+  systemProperties = [
+    'file.encoding'    : 'UTF-8',
+    'selenide.headless': 'false',
+    'selenide.startMaximized': 'true',
+    'selenide.browser': 'chrome',
+    'BUILD_URL'        : System.getenv()['BUILD_URL'],
+  ]
+}
