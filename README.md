@@ -1,5 +1,5 @@
 # kotlinDokuWikiInit
-Подготовка данных в DokuWiki для тестового задания # 3
+Подготовка данных в DokuWiki
 
 ## Настройки
 Заданы в build.gradle раздел systemProperties. Для запуска тестов в различных браузерах требуется наличие соответствующих драйверов в системной переменной PATH (IEDriver, GoogleChromeDriver, GeckoDriver)
